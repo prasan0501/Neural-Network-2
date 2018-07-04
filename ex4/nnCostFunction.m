@@ -79,9 +79,10 @@ a3 = sigmoid(z3);
 
 J = (1/m)*sum(sum(((-ymat.*log(a3))-((ones(size(ymat))-ymat).*log(ones(size(a3))-a3)))));
 
+theta1WOBias = Theta1(:,2:(input_layer_size+1));
+theta2WOBias = Theta2(:,2:(hidden_layer_size+1));
 
-
-
+J = J + ((lambda/(2*m))*((sum(sum(theta1WOBias.*theta1WOBias)))+(sum(sum(theta2WOBias.*theta2WOBias)))));
 
 
 
