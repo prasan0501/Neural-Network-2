@@ -84,13 +84,15 @@ theta2WOBias = Theta2(:,2:(hidden_layer_size+1));
 
 J = J + ((lambda/(2*m))*((sum(sum(theta1WOBias.*theta1WOBias)))+(sum(sum(theta2WOBias.*theta2WOBias)))));
 
+delta3 = a3 - ymat;
 
+delta2 = sigmoidGradient(z2).*(delta3*Theta2(:,2:end));
 
+Theta1_grad = (Theta1_grad + delta2'*a1)/m;
+Theta2_grad = (Theta2_grad + delta3'*a2)/m;
 
-
-
-
-
+Theta1_grad = [Theta1_grad(:,1) (Theta1_grad(:,2:end)+Theta1(:,2:end)*(lambda/m))];
+Theta2_grad = [Theta2_grad(:,1) (Theta2_grad(:,2:end)+Theta2(:,2:end)*(lambda/m))];
 
 
 % -------------------------------------------------------------
